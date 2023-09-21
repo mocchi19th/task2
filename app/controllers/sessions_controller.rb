@@ -1,6 +1,10 @@
 class SessionsController < ApplicationController
   
   def new
+    if logged_in?
+      flash[:into] ='すでにログインしています'
+      redirect_to current_user
+    end
   end
   
   def create
@@ -20,4 +24,7 @@ class SessionsController < ApplicationController
     flash[:success] = 'ログアウトしました。'
     redirect_to root_url
   end
+  
+  private
+  
 end
